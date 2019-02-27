@@ -13,9 +13,6 @@ module.exports = {
         loader: 'babel-loader',
         test: /\.js[x]?/,
         exclude: /node_modules/,
-        options: {
-          presets: ['react', 'env', 'es2015'],
-        }
       },
       {
         test: /\.(scss)$/,
