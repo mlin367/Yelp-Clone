@@ -14,6 +14,10 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
+app.get('*', function (request, response){
+  response.sendFile(path.join(__dirname, '/../client/dist/index.html'))
+})
+
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
 });
