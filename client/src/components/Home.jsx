@@ -1,5 +1,6 @@
 import React from 'react';
 import PlacesList from './PlacesList';
+import GoogleMap from './GoogleMap';
 import axios from 'axios';
 
 class Home extends React.Component {
@@ -27,6 +28,7 @@ class Home extends React.Component {
         <h1>Home</h1>
         <input onChange={this.handleOnInputChange}></input>
         <button>Search</button>
+        <GoogleMap saved={[{lat: -33.867, lng: 151.195}]} id="Test"/>
         <PlacesList />
       </div>
     )
