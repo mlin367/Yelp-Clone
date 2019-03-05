@@ -28,7 +28,7 @@ class Home extends React.Component {
         <h1>Home</h1>
         <input onChange={this.handleOnInputChange}></input>
         <button>Search</button>
-        <GoogleMap saved={[{lat: -33.867, lng: 151.195}]} id="Test"/>
+        <GoogleMap  id="Test"/>
         <PlacesList />
       </div>
     )

@@ -7,31 +7,36 @@ class GoogleMap extends React.Component {
   }
 
   onScriptLoad() {
-    let pos;
     let map;
     let marker;
 
-    if (this.props.saved) {
-      pos = new window.google.maps.LatLng(this.props.saved[0].lat,this.props.saved[0].lng);
-    } else {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          pos = new window.google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        });
-      }
+    const getCoords = () => {
+      return new Promise((resolve, reject) => {
+        if (this.props.saved) {
+           resolve(new window.google.maps.LatLng(this.props.saved[0].lat, this.props.saved[0].lng));
+        } else {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+              resolve(new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+            });
+          }
+        }
+      })
     }
 
-    map = new window.google.maps.Map(document.getElementById(this.props.id), {
-      center: pos,
-      zoom: 15
-    });
-
-    marker = new window.google.maps.Marker({
-      position: pos,
-      map,
-      title: 'Your favorite place'
+    getCoords().then(pos => {
+      map = new window.google.maps.Map(document.getElementById(this.props.id), {
+        center: pos,
+        zoom: 15
+      });
+  
+      marker = new window.google.maps.Marker({
+        position: pos,
+        map,
+        title: 'Your favorite place'
+      })
     })
-
+    
   }
 
   componentDidMount() {
