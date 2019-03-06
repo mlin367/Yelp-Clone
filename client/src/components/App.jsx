@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home';
+import HomeContainer from '../redux/containers/HomeContainer';
 import Saved from './Saved';
 import About from './About';
 import NavBar from './NavBar';
@@ -9,7 +9,7 @@ const App = props => (
   <Router>
     <div className="App">
       <NavBar />
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={HomeContainer} />
       <Route path="/saved" component={Saved} />
       <Route path="/about" component={About} />
     </div>

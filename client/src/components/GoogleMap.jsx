@@ -6,58 +6,64 @@ class GoogleMap extends React.Component {
     this.onScriptLoad = this.onScriptLoad.bind(this);
   }
 
+  // loadMap(lat, lng) {
+  //   let pos = new window.google.maps.LatLng(lat, lng);
+  //   let map = new window.google.maps.Map(
+  //     document.getElementById(this.props.id),
+  //     {
+  //       center: pos,
+  //       zoom: 15
+  //     }
+  //   );
+  //   return map;
+  // }
+
+  // loadMarkers(position, map, title) {
+  //   new window.google.maps.Marker({
+  //     position,
+  //     map,
+  //     title
+  //   });
+  // }
+
   onScriptLoad() {
     let map;
-    let marker;
-
-    const getCoords = () => {
-      return new Promise((resolve, reject) => {
-        if (this.props.saved) {
-           resolve(new window.google.maps.LatLng(this.props.saved[0].lat, this.props.saved[0].lng));
-        } else {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-              resolve(new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-            });
-          }
-        }
-      })
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        let pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map = new window.google.maps.Map(document.getElementById(this.props.id), {
+          center: pos,
+          zoom: 15
+        })
+        new window.google.maps.Marker({
+          position: pos,
+          map,
+          title: 'Your current location'
+        })
+        this.props.updateCoords(position.coords.latitude, position.coords.longitude);
+        window.HomeMap = map;
+      });    
     }
-
-    getCoords().then(pos => {
-      map = new window.google.maps.Map(document.getElementById(this.props.id), {
-        center: pos,
-        zoom: 15
-      });
-  
-      marker = new window.google.maps.Marker({
-        position: pos,
-        map,
-        title: 'Your favorite place'
-      })
-    })
-    
   }
 
   componentDidMount() {
     if (!window.google) {
       const s = document.createElement('script');
       s.type = 'text/javascript';
-      s.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY}&libraries=places`;
+      s.src = `https://maps.googleapis.com/maps/api/js?key=${
+        process.env.API_KEY
+      }&libraries=places`;
       const x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
-      s.addEventListener('load', (e) => this.onScriptLoad());
+      s.addEventListener('load', e => this.onScriptLoad());
     } else {
       this.onScriptLoad();
     }
   }
 
-  render() {
-    return(
-      <div style={{ width: 500, height: 500 }} id={this.props.id}>
 
-      </div>
-    )
+  render() {
+    return <div style={{ width: 500, height: 500 }} id={this.props.id} />;
   }
 }
 
