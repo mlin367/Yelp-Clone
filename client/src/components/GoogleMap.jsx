@@ -25,7 +25,7 @@ class GoogleMap extends React.Component {
         let pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map = new window.google.maps.Map(document.getElementById(this.props.id), {
           center: pos,
-          zoom: 15
+          zoom: 13
         })
         this.homeMarker = new window.google.maps.Marker({
           position: pos,
