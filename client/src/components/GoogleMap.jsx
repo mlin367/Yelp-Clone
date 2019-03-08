@@ -3,11 +3,11 @@ import React from 'react';
 class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
-    this.onScriptLoad = this.onScriptLoad.bind(this);
     this.state = {
       markers: []
     }
     this.homeMarker;
+    this.onScriptLoad = this.onScriptLoad.bind(this);
   }
 
   loadMarkers(position, map, title) {
@@ -68,7 +68,6 @@ class GoogleMap extends React.Component {
       })
     }
   }
-
 
   render() {
     return <div style={{ width: 500, height: 500 }} id={this.props.id} />;

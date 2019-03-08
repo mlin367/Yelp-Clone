@@ -5,8 +5,8 @@ const ListEntry = props => (
     <h2>{props.obj.name}</h2>
     <img src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
     <ul>
-      <li>{props.obj.formatted_address}</li>
-      <li>{props.obj.rating}</li>
+      <li>Address: {props.obj.formatted_address}</li>
+      <li>Rating: {props.obj.rating}</li>
     </ul>
   </div>
 );
