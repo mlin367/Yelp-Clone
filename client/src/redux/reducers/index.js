@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_COORDS':
       return {...state, currentCoords: { lat: action.payload.lat, lng: action.payload.lng }};
     case 'UPDATE_RESULTS':
-      return {...state, data: action.payload.data};
+      return {...state, data: action.payload};
     default:
       return state;
   }

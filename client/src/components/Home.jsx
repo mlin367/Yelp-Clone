@@ -1,5 +1,5 @@
 import React from 'react';
-import PlacesList from './PlacesList';
+import PlacesListContainer from '../redux/containers/PlacesListContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
 import axios from 'axios';
 
@@ -39,10 +39,12 @@ class Home extends React.Component {
     return (
       <div className="Home">
         <h1>Home</h1>
-        <input onChange={this.handleOnInputChange}></input>
-        <button onClick={this.handleOnClick}>Search</button>
-        <GoogleMapContainer id="Test"/>
-        <PlacesList />
+        <div className="homeWrapper1">
+          <input onChange={this.handleOnInputChange}></input>
+          <button onClick={this.handleOnClick}>Search</button>
+          <PlacesListContainer />
+        </div>
+          <GoogleMapContainer id="Test"/>
       </div>
     )
   }
