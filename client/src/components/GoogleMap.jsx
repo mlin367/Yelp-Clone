@@ -4,27 +4,19 @@ class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
     this.onScriptLoad = this.onScriptLoad.bind(this);
+    this.state = {
+      markers: []
+    }
+    this.homeMarker;
   }
 
-  // loadMap(lat, lng) {
-  //   let pos = new window.google.maps.LatLng(lat, lng);
-  //   let map = new window.google.maps.Map(
-  //     document.getElementById(this.props.id),
-  //     {
-  //       center: pos,
-  //       zoom: 15
-  //     }
-  //   );
-  //   return map;
-  // }
-
-  // loadMarkers(position, map, title) {
-  //   new window.google.maps.Marker({
-  //     position,
-  //     map,
-  //     title
-  //   });
-  // }
+  loadMarkers(position, map, title) {
+    return new window.google.maps.Marker({
+      position,
+      map,
+      title
+    });
+  }
 
   onScriptLoad() {
     let map;
@@ -35,10 +27,11 @@ class GoogleMap extends React.Component {
           center: pos,
           zoom: 15
         })
-        new window.google.maps.Marker({
+        this.homeMarker = new window.google.maps.Marker({
           position: pos,
           map,
-          title: 'Your current location'
+          title: 'Your current location',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
         })
         this.props.updateCoords(position.coords.latitude, position.coords.longitude);
         window.HomeMap = map;
@@ -58,6 +51,21 @@ class GoogleMap extends React.Component {
       s.addEventListener('load', e => this.onScriptLoad());
     } else {
       this.onScriptLoad();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) {
+      let markers = [];
+      for (let marker of this.state.markers) {
+        marker.setMap(null);
+      }
+      for (let obj of this.props.data) {
+        markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
+      };
+      this.setState({
+        markers
+      })
     }
   }
 

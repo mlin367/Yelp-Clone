@@ -2,16 +2,16 @@ import GoogleMap from '../../components/GoogleMap';
 import { connect } from 'react-redux';
 import updateCoords from '../actions/updateCoords';
 
-// const mapStateToProps = state => {
-//   return {
-//     currentCoords: state.currentCoords
-//   }
-// };
+const mapStateToProps = state => {
+  return {
+    data: state.data
+  }
+};
 
 const mapDispatchToProps = {
   updateCoords
 };
 
-const GoogleMapContainer = connect(null, mapDispatchToProps)(GoogleMap);
+const GoogleMapContainer = connect(mapStateToProps, mapDispatchToProps)(GoogleMap);
 
 export default GoogleMapContainer;
