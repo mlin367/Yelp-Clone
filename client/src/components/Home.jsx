@@ -1,6 +1,7 @@
 import React from 'react';
 import PlacesListContainer from '../redux/containers/PlacesListContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
+import '../../scss/custom.scss'
 import axios from 'axios';
 
 class Home extends React.Component {
@@ -37,14 +38,16 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="Home">
+      <div className="Home container">
         <h1>Home</h1>
-        <div className="homeWrapper1">
-          <input onChange={this.handleOnInputChange}></input>
-          <button onClick={this.handleOnClick}>Search</button>
-          <PlacesListContainer />
-        </div>
+        <div className="row">
+          <div className="homeWrapper1 col">
+            <input onChange={this.handleOnInputChange}></input>
+            <button onClick={this.handleOnClick}>Search</button>
+            <PlacesListContainer />
+          </div>
           <GoogleMapContainer id="Test"/>
+        </div>
       </div>
     )
   }
