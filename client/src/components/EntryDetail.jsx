@@ -2,7 +2,7 @@ import React from 'react';
 
 const EntryDetail = props => (
   <div className="EntryDetail">
-    {props.name}
+    {props.currentPlace.name}
   </div>
 );
 

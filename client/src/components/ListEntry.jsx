@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ListEntry = props => {
 
@@ -17,7 +18,7 @@ const ListEntry = props => {
 
   return (
     <div className="ListEntry">
-      <h2 onClick={handleOnClick}>{props.obj.name}</h2>
+      <Link onClick={handleOnClick} to={`/searchResult=${props.id}`}>{props.obj.name}</Link>
       <img src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
       <ul>
         <li>Address: {props.obj.formatted_address}</li>

@@ -6,9 +6,9 @@ import { Route } from 'react-router-dom';
 const PlacesList = props => (
   <div className="PlacesList">
     {props.data.map((obj, i) => (
-      <ListEntryContainer obj={obj} key={Math.random() * i}/>
+      <ListEntryContainer obj={obj} key={Math.random() * i} id={i}/>
     ))}
-    <Route path='/searchResult:id' component={EntryDetail} />
+    <Route path='/searchResult=:id' component={EntryDetail} />
   </div>
 )
 
