@@ -1,6 +1,6 @@
 import React from 'react';
 import ListEntryContainer from '../redux/containers/ListEntryContainer';
-import EntryDetail from './EntryDetail';
+import EntryDetailContainer from '../redux/containers/EntryDetailContainer';
 import { Route } from 'react-router-dom';
 
 const PlacesList = props => (
@@ -8,7 +8,7 @@ const PlacesList = props => (
     {props.data.map((obj, i) => (
       <ListEntryContainer obj={obj} key={Math.random() * i} id={i}/>
     ))}
-    <Route path='/searchResult=:id' component={EntryDetail} />
+    <Route path='/searchResult=:id' component={EntryDetailContainer} />
   </div>
 )
 
