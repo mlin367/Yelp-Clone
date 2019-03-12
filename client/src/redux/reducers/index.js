@@ -3,7 +3,8 @@ const initialState = {
     lat: 0,
     lng: 0
   },
-  data: []
+  data: [],
+  currentPlace: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const rootReducer = (state = initialState, action) => {
       return {...state, currentCoords: { lat: action.payload.lat, lng: action.payload.lng }};
     case 'UPDATE_RESULTS':
       return {...state, data: action.payload};
+    case 'UPDATE_PLACE':
+      return {...state, currentPlace: action.payload};
     default:
       return state;
   }
