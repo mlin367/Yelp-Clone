@@ -20,6 +20,7 @@ class GoogleMap extends React.Component {
 
   onScriptLoad() {
     let map;
+    let markers = [];
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         let pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -35,7 +36,13 @@ class GoogleMap extends React.Component {
         })
         this.props.updateCoords(position.coords.latitude, position.coords.longitude);
         window.HomeMap = map;
-      });    
+        for (let obj of this.props.data) {
+          markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
+        };
+        this.setState({
+          markers
+        })
+      }, () => alert('Sorry, no position available'), { maximumAge: 30000 });      
     }
   }
 
