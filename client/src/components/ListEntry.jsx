@@ -18,7 +18,9 @@ const ListEntry = props => {
 
   return (
     <div className="ListEntry">
-      <Link onClick={handleOnClick} to={`/searchResult=${props.id}`}>{props.obj.name}</Link>
+      <h2 onClick={handleOnClick}>
+        <Link to={`/home/result=${props.id}`}>{props.obj.name}</Link>
+      </h2>
       <img src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
       <ul>
         <li>Address: {props.obj.formatted_address}</li>

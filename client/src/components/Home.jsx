@@ -1,6 +1,8 @@
 import React from 'react';
 import PlacesListContainer from '../redux/containers/PlacesListContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
+import EntryDetailContainer from '../redux/containers/EntryDetailContainer';
+import { Route, Link } from 'react-router-dom';
 import '../../scss/custom.scss'
 import axios from 'axios';
 
@@ -43,8 +45,14 @@ class Home extends React.Component {
         <div className="row">
           <div className="homeWrapper1 col">
             <input onChange={this.handleOnInputChange}></input>
-            <button onClick={this.handleOnClick}>Search</button>
-            <PlacesListContainer />
+            <button onClick={this.handleOnClick}>
+              <Link to='/home/results'>
+                Search
+              </Link>
+            </button>
+            {/* <PlacesListContainer /> */}
+            <Route path='/home/results' component={PlacesListContainer} />
+            <Route path='/home/result=:id' component={EntryDetailContainer} />
           </div>
           <GoogleMapContainer id="Test"/>
         </div>

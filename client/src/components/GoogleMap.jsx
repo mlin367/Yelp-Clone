@@ -22,6 +22,7 @@ class GoogleMap extends React.Component {
     let map;
     let markers = [];
     if (navigator.geolocation) {
+      //Creating Google Map
       navigator.geolocation.getCurrentPosition(position => {
         let pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map = new window.google.maps.Map(document.getElementById(this.props.id), {
@@ -36,6 +37,8 @@ class GoogleMap extends React.Component {
         })
         this.props.updateCoords(position.coords.latitude, position.coords.longitude);
         window.HomeMap = map;
+
+        //Initialize markers
         for (let obj of this.props.data) {
           markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
         };

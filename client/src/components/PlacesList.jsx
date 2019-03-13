@@ -8,7 +8,7 @@ const PlacesList = props => (
     {props.data.map((obj, i) => (
       <ListEntryContainer obj={obj} key={Math.random() * i} id={i}/>
     ))}
-    <Route path='/searchResult=:id' component={EntryDetailContainer} />
+    {/* <Route path='/home/result=:id' component={EntryDetailContainer} /> */}
   </div>
 )
 
