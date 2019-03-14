@@ -2,24 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBar = props => (
-  <div className="NavBar">
-    <div className="Yelp">Yelp-Clone!</div>
-    <div className="NavWrapper1">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div className="Yelp navbar-brand">Yelp-Clone!</div>
+    <div className="navBarWrapper">
       <Link onClick={() => {
         props.updateCurrentPlace({});
         window.HomeMap.setZoom(13);
         window.HomeMap.setCenter(props.currentCoords);
-      }} to="/home/results" className="NavHome">
+      }} to="/home/results" className="NavHome mx-3 nav-item">
         Home
       </Link>
-      <Link to="/saved" className="NavSaved">
+      <Link to="/saved" className="NavSaved mx-3 nav-item">
         Saved
       </Link>
-      <Link to="/about" className="NavAbout">
+      <Link to="/about" className="NavAbout mx-3 nav-item">
         About
       </Link>
     </div>
-  </div>
+  </nav>
 );
 
 export default NavBar;
