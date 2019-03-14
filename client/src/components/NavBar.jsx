@@ -5,7 +5,7 @@ const NavBar = props => (
   <div className="NavBar">
     <div className="Yelp">Yelp-Clone!</div>
     <div className="NavWrapper1">
-      <Link to="/" className="NavHome">
+      <Link to="/home/results" className="NavHome">
         Home
       </Link>
       <Link to="/saved" className="NavSaved">

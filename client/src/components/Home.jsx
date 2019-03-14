@@ -2,7 +2,7 @@ import React from 'react';
 import PlacesListContainer from '../redux/containers/PlacesListContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
 import EntryDetailContainer from '../redux/containers/EntryDetailContainer';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import '../../scss/custom.scss'
 import axios from 'axios';
 
@@ -50,9 +50,8 @@ class Home extends React.Component {
                 Search
               </Link>
             </button>
-            <Redirect from='/home' to='home/results' />
-            <Route path='/home/results' component={PlacesListContainer} />
-            <Route path='/home/result=:id' component={EntryDetailContainer} />
+              <Route path='/home/results' component={PlacesListContainer} />
+              <Route path='/home/result=:id' component={EntryDetailContainer} />
           </div>
           <GoogleMapContainer id="Test"/>
         </div>
