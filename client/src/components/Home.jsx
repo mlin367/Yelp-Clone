@@ -52,7 +52,7 @@ class Home extends React.Component {
               <Route path='/home/results' component={PlacesListContainer} />
               <Route path='/home/result=:id' component={EntryDetailContainer} />
           </div>
-          <GoogleMapContainer id="Test"/>
+          <GoogleMapContainer markers={this.props.currentPlace.name ? [this.props.currentPlace] : this.props.data} id="Test"/>
         </div>
       </div>
     )

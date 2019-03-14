@@ -4,7 +4,9 @@ import updateResults from '../actions/updateResults';
 
 const mapStateToProps = state => {
   return {
-    currentCoords: state.currentCoords
+    currentCoords: state.currentCoords,
+    currentPlace: state.currentPlace,
+    data: state.data
   }
 };
 

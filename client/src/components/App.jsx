@@ -2,7 +2,7 @@ import React from 'react';
 import HomeContainer from '../redux/containers/HomeContainer';
 import Saved from './Saved';
 import About from './About';
-import NavBar from './NavBar';
+import NavBarContainer from '../redux/containers/NavBarContainer';
 import NotFound from './NotFound';
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import '../../scss/custom.scss'
@@ -10,7 +10,7 @@ import '../../scss/custom.scss'
 const App = props => (
   <Router>
     <div className="App">
-      <NavBar />
+      <NavBarContainer />
       <Switch>
         <Route exact path="/" render={() => <Redirect to='/home'/>} />
         <Route path="/home" component={HomeContainer} />

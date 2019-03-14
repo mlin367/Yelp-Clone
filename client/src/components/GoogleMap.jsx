@@ -5,7 +5,6 @@ class GoogleMap extends React.Component {
     super(props);
     this.state = {
       markers: [],
-      currentPlaceMarker: null
     }
     this.homeMarker;
     this.onScriptLoad = this.onScriptLoad.bind(this);
@@ -40,7 +39,7 @@ class GoogleMap extends React.Component {
         window.HomeMap = map;
 
         //Initialize markers
-        for (let obj of this.props.data) {
+        for (let obj of this.props.markers) {
           markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
         };
         this.setState({
@@ -66,26 +65,12 @@ class GoogleMap extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.currentPlace !== prevProps.currentPlace && this.props.currentPlace.name) {
-      if (this.state.currentPlaceMarker) {
-        this.state.currentPlaceMarker.setMap(null);
-        this.setState({
-          currentPlaceMarker: null
-        })
-      }
-      for (let marker of this.state.markers) {
-        marker.setMap(null);
-      };
-      this.setState({
-        currentPlaceMarker: this.loadMarkers(this.props.currentPlace.geometry.location, window.HomeMap, this.props.currentPlace.name)
-      });
-    } 
-    if (this.props.data !== prevProps.data) {
+    if (this.props.markers !== prevProps.markers) {
       let markers = [];
       for (let marker of this.state.markers) {
         marker.setMap(null);
       }
-      for (let obj of this.props.data) {
+      for (let obj of this.props.markers) {
         markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
       };
       this.setState({

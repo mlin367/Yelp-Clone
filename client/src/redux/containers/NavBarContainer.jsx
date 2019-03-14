@@ -1,10 +1,9 @@
-import EntryDetail from '../../components/EntryDetail';
+import NavBar from '../../components/NavBar';
 import { connect } from 'react-redux';
 import updateCurrentPlace from '../actions/updateCurrentPlace';
 
 const mapStateToProps = state => {
   return {
-    currentPlace: state.currentPlace,
     currentCoords: state.currentCoords
   };
 };
@@ -13,6 +12,6 @@ const mapDispatchToProps = {
   updateCurrentPlace
 };
 
-const EntryDetailContainer = connect(mapStateToProps, mapDispatchToProps)(EntryDetail);
+const NavBarContainer = connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
-export default EntryDetailContainer;
+export default NavBarContainer;

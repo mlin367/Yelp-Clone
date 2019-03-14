@@ -21,7 +21,11 @@ const EntryDetail = props => (
       </li>
 
     </ul>
-    <h3 onClick={() => props.updateCurrentPlace({})}>
+    <h3 onClick={() => {
+      props.updateCurrentPlace({});
+      window.HomeMap.setZoom(13);
+      window.HomeMap.setCenter(props.currentCoords);
+      }}>
       <Link to='/home/results'>Back</Link>
     </h3>
   </div>

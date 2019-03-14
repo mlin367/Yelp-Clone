@@ -13,6 +13,7 @@ const ListEntry = props => {
         console.log(place);
         props.updateCurrentPlace(place);
         window.HomeMap.setCenter(place.geometry.location)
+        window.HomeMap.setZoom(15);
       }
     })
   }

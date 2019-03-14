@@ -5,7 +5,11 @@ const NavBar = props => (
   <div className="NavBar">
     <div className="Yelp">Yelp-Clone!</div>
     <div className="NavWrapper1">
-      <Link to="/home/results" className="NavHome">
+      <Link onClick={() => {
+        props.updateCurrentPlace({});
+        window.HomeMap.setZoom(13);
+        window.HomeMap.setCenter(props.currentCoords);
+      }} to="/home/results" className="NavHome">
         Home
       </Link>
       <Link to="/saved" className="NavSaved">
