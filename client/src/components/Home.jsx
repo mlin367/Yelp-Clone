@@ -3,7 +3,6 @@ import PlacesListContainer from '../redux/containers/PlacesListContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
 import EntryDetailContainer from '../redux/containers/EntryDetailContainer';
 import { Route, Link } from 'react-router-dom';
-import '../../scss/custom.scss'
 import axios from 'axios';
 
 class Home extends React.Component {

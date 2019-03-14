@@ -4,7 +4,8 @@ class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      markers: []
+      markers: [],
+      currentPlaceMarker: null
     }
     this.homeMarker;
     this.onScriptLoad = this.onScriptLoad.bind(this);
@@ -65,6 +66,20 @@ class GoogleMap extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.currentPlace !== prevProps.currentPlace && this.props.currentPlace.name) {
+      if (this.state.currentPlaceMarker) {
+        this.state.currentPlaceMarker.setMap(null);
+        this.setState({
+          currentPlaceMarker: null
+        })
+      }
+      for (let marker of this.state.markers) {
+        marker.setMap(null);
+      };
+      this.setState({
+        currentPlaceMarker: this.loadMarkers(this.props.currentPlace.geometry.location, window.HomeMap, this.props.currentPlace.name)
+      });
+    } 
     if (this.props.data !== prevProps.data) {
       let markers = [];
       for (let marker of this.state.markers) {

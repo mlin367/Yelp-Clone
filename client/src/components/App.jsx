@@ -5,6 +5,7 @@ import About from './About';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import '../../scss/custom.scss'
 
 const App = props => (
   <Router>

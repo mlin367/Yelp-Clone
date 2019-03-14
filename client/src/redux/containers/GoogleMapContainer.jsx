@@ -4,6 +4,7 @@ import updateCoords from '../actions/updateCoords';
 
 const mapStateToProps = state => {
   return {
+    currentPlace: state.currentPlace,
     data: state.data
   }
 };

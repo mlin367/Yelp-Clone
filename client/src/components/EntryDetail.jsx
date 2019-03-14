@@ -11,6 +11,7 @@ const EntryDetail = props => (
     </div>
     <ul>
       <li>Address: {props.currentPlace.formatted_address}</li>
+      <li>Rating: {props.currentPlace.rating}</li>
       <li>Phone Number: {props.currentPlace.formatted_phone_number}</li>
       <li>Hours: <ol>
                   {props.currentPlace.opening_hours ? props.currentPlace.opening_hours.weekday_text.map(string => (
@@ -20,7 +21,7 @@ const EntryDetail = props => (
       </li>
 
     </ul>
-    <h3>
+    <h3 onClick={() => props.updateCurrentPlace({})}>
       <Link to='/home/results'>Back</Link>
     </h3>
   </div>

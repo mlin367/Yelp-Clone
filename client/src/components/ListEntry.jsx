@@ -12,6 +12,7 @@ const ListEntry = props => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         console.log(place);
         props.updateCurrentPlace(place);
+        window.HomeMap.setCenter(place.geometry.location)
       }
     })
   }

@@ -1,5 +1,6 @@
 import EntryDetail from '../../components/EntryDetail';
 import { connect } from 'react-redux';
+import updateCurrentPlace from '../actions/updateCurrentPlace';
 
 const mapStateToProps = state => {
   return {
@@ -7,6 +8,10 @@ const mapStateToProps = state => {
   };
 };
 
-const EntryDetailContainer = connect(mapStateToProps)(EntryDetail);
+const mapDispatchToProps = {
+  updateCurrentPlace
+};
+
+const EntryDetailContainer = connect(mapStateToProps, mapDispatchToProps)(EntryDetail);
 
 export default EntryDetailContainer;
