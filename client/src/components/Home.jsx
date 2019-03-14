@@ -41,7 +41,7 @@ class Home extends React.Component {
     return (
       <div className="Home container">
         <h1>Home</h1>
-        <div className="row">
+        <div style={{minHeight: '80vh'}} className="row">
           <div className="homeWrapper1 col">
             <input onChange={this.handleOnInputChange}></input>
             <button onClick={this.handleOnClick}>
