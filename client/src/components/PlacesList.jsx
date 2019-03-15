@@ -8,6 +8,7 @@ const PlacesList = props => (
   >
     {props.data.map((obj, i) => (
       <ListEntryContainer
+        savePlace={props.savePlace}
         path={props.path}
         request={props.request}
         handleOnClick={props.handleOnClick}

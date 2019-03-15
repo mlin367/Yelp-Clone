@@ -44,7 +44,7 @@ class GoogleMap extends React.Component {
         this.setState({
           markers
         })
-      }, () => alert('Sorry, no position available'), { maximumAge: 30000 });      
+      }, () => alert('Sorry, no position available'), {timeout: 30000, enableHighAccuracy: true, maximumAge: 30000 });      
     } 
   }
 

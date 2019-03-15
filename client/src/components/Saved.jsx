@@ -11,18 +11,30 @@ class Saved extends React.Component {
     this.state = {
       savedData: []
     };
+    this.fetch = this.fetch.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetch();
   }
 
   fetch() {
-    
+    axios.get('/api/places')
+      .then(result => {
+        let data = [];
+        result.data.forEach(obj => {
+          console.log(this.getDatafromID(obj.place_id))
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   getDatafromID(id) {
-    let request = {
-      placeId: id,
-    };
+    // let request = {
+    //   placeId: id,
+    // };
     let service = new window.google.maps.places.PlacesService(window.HomeMap);
-    service.getDetails(request, (place, status) => {
+    service.getDetails({placeId: id}, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         return place;
       }
