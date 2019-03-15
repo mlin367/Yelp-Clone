@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PlacesList from './PlacesList';
 import EntryDetailContainer from '../redux/containers/EntryDetailContainer';
 import GoogleMapContainer from '../redux/containers/GoogleMapContainer';
+import axios from 'axios';
 
 class Saved extends React.Component {
   constructor(props) {
@@ -12,6 +13,10 @@ class Saved extends React.Component {
     };
   }
 
+  fetch() {
+
+  }
+
   render() {
     return (
       <div className="Saved container">
@@ -19,8 +24,8 @@ class Saved extends React.Component {
         <div style={{minHeight: '80vh'}} className="row">
           <div className="savedWrapper1 col">
             <Redirect from='/saved' to='/saved/results' />
-            <Route path='/saved/results' render={() => <PlacesList data={this.state.savedData} />} />
-            <Route path='/saved/result=:id' component={EntryDetailContainer} />
+            <Route path='/saved/results' render={() => <PlacesList request='Delete' path='/saved/result' data={this.state.savedData} />} />
+            <Route path='/saved/result=:id' render={ () => <EntryDetailContainer path='/saved/results'/>} />
           </div>
           <GoogleMapContainer markers={this.props.currentPlace.name ? [this.props.currentPlace] : this.state.savedData} id="savedMap"/>
         </div>

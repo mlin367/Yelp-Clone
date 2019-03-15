@@ -9,11 +9,11 @@ const EntryDetail = props => (
       window.HomeMap.setZoom(13);
       window.HomeMap.setCenter(props.currentCoords);
       }}>
-      <Link to='/home/results'>Back</Link>
+      <Link to={`${props.path}`}>Back</Link>
     </h3>
     <div className="pictureContainer container-fluid">
       {props.currentPlace.photos ? props.currentPlace.photos.map((obj, i) => (
-        <img className="img-fluid mx-2 img-thumbnail" src={obj.getUrl({'maxWidth': 100, 'maxHeight': 100})}></img>
+        <img key={Math.random()*i} className="img-fluid mx-2 img-thumbnail" src={obj.getUrl({'maxWidth': 100, 'maxHeight': 100})}></img>
       )) : null}
     </div>
     <ul>
@@ -28,14 +28,14 @@ const EntryDetail = props => (
       </li>
       <li>Reviews: <ul>
                     {props.currentPlace.reviews ? props.currentPlace.reviews.map((obj, i) => (
-                      <li>
+                      <li key={Math.random()*i}>
                         Author: {obj.author_name}
                         <br />
                         Rating: {obj.rating}
                         <br />
-                        Review: {obj.text}
-                        <br />
+                        Review: <p>{obj.text}</p>
                         Submitted: {obj.relative_time_description}
+                        <br /><br />
                       </li>
                     )) : null}
                   </ul>
