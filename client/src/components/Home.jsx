@@ -25,7 +25,7 @@ class Home extends React.Component {
     axios.post('/api/places', {
       place_id
     })
-    .then(response => console.log('id saved'))
+    .then(response => console.log('place id saved'))
     .catch(err => console.error(err));
   }
 
