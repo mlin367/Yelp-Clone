@@ -14,7 +14,19 @@ class Saved extends React.Component {
   }
 
   fetch() {
+    
+  }
 
+  getDatafromID(id) {
+    let request = {
+      placeId: id,
+    };
+    let service = new window.google.maps.places.PlacesService(window.HomeMap);
+    service.getDetails(request, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        return place;
+      }
+    })
   }
 
   render() {

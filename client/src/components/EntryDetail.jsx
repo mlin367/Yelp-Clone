@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 
 const EntryDetail = props => (
   <div style={{overflowY: 'scroll', maxHeight: '80vh'}} className="EntryDetail">
-    <h2>{props.currentPlace.name}</h2>
+    <div className="d-flex justify-content-between">
+      <h2>{props.currentPlace.name}</h2>
+      <button>{`${props.request}`}</button>
+    </div>
     <h3 onClick={() => {
       props.updateCurrentPlace({});
       window.HomeMap.setZoom(13);

@@ -68,7 +68,7 @@ class Home extends React.Component {
               </Link>
             </button>
               <Route path='/home/results' render={() => <PlacesListContainer path='/home/result' request='Save' handleOnClick={this.handleListEntryClick}/>} />
-              <Route path='/home/result=:id' render={ () => <EntryDetailContainer path='/home/results' />} />
+              <Route path='/home/result=:id' render={ () => <EntryDetailContainer request='Save' path='/home/results' />} />
           </div>
           <GoogleMapContainer markers={this.props.currentPlace.name ? [this.props.currentPlace] : this.props.data} id="Test"/>
         </div>
