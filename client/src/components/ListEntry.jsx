@@ -3,27 +3,12 @@ import { Link } from 'react-router-dom';
 
 const ListEntry = props => {
 
-  const handleOnClick = () => {
-    let request = {
-      placeId: props.obj.place_id,
-    };
-    let service = new window.google.maps.places.PlacesService(window.HomeMap);
-    service.getDetails(request, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        console.log(place);
-        props.updateCurrentPlace(place);
-        window.HomeMap.setCenter(place.geometry.location)
-        window.HomeMap.setZoom(15);
-      }
-    })
-  }
-
   return (
     <div className="ListEntry">
-      <h2 onClick={handleOnClick}>
-        <Link to={`/home/result=${props.id}`}>{props.obj.name}</Link>
+      <h2>
+        <Link onClick={() => props.handleOnClick(props)} to={`/home/result=${props.id}`}>{props.obj.name}</Link>
       </h2>
-      <img src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
+      <img className="img-fluid mx-auto img-thumbnail" src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
       <ul>
         <li>Address: {props.obj.formatted_address}</li>
         <li>Rating: {props.obj.rating}</li>

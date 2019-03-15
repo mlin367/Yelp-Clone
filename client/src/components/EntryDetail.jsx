@@ -11,9 +11,9 @@ const EntryDetail = props => (
       }}>
       <Link to='/home/results'>Back</Link>
     </h3>
-    <div className="pictureContainer">
+    <div className="pictureContainer container-fluid">
       {props.currentPlace.photos ? props.currentPlace.photos.map((obj, i) => (
-        <img src={obj.getUrl({'maxWidth': 100, 'maxHeight': 100})}></img>
+        <img className="img-fluid mx-2 img-thumbnail" src={obj.getUrl({'maxWidth': 100, 'maxHeight': 100})}></img>
       )) : null}
     </div>
     <ul>

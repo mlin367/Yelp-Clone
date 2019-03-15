@@ -37,6 +37,21 @@ class Home extends React.Component {
     })
   }
 
+  handleListEntryClick(props) {
+    let request = {
+      placeId: props.obj.place_id,
+    };
+    let service = new window.google.maps.places.PlacesService(window.HomeMap);
+    service.getDetails(request, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        console.log(place);
+        props.updateCurrentPlace(place);
+        window.HomeMap.setCenter(place.geometry.location)
+        window.HomeMap.setZoom(15);
+      }
+    })
+  }
+
   render() {
     return (
       <div className="Home container">
@@ -49,7 +64,7 @@ class Home extends React.Component {
                 Search
               </Link>
             </button>
-              <Route path='/home/results' component={PlacesListContainer} />
+              <Route path='/home/results' render={() => <PlacesListContainer handleOnClick={this.handleListEntryClick}/>} />
               <Route path='/home/result=:id' component={EntryDetailContainer} />
           </div>
           <GoogleMapContainer markers={this.props.currentPlace.name ? [this.props.currentPlace] : this.props.data} id="Test"/>

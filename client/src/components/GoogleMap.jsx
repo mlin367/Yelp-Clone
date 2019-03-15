@@ -19,10 +19,10 @@ class GoogleMap extends React.Component {
   }
 
   onScriptLoad() {
-    let map;
     let markers = [];
     if (navigator.geolocation) {
       //Creating Google Map
+      let map;
       navigator.geolocation.getCurrentPosition(position => {
         let pos = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map = new window.google.maps.Map(document.getElementById(this.props.id), {
@@ -37,8 +37,7 @@ class GoogleMap extends React.Component {
         })
         this.props.updateCoords(position.coords.latitude, position.coords.longitude);
         window.HomeMap = map;
-
-        //Initialize markers
+        //Initialize markers after creating map
         for (let obj of this.props.markers) {
           markers.push(this.loadMarkers(obj.geometry.location, window.HomeMap, obj.name));
         };
@@ -46,7 +45,7 @@ class GoogleMap extends React.Component {
           markers
         })
       }, () => alert('Sorry, no position available'), { maximumAge: 30000 });      
-    }
+    } 
   }
 
   componentDidMount() {
