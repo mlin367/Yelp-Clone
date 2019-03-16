@@ -19,41 +19,54 @@ class Saved extends React.Component {
   }
 
   fetch() {
-    axios.get('/api/places')
-      .then(result => {
-        let data = [];
-        result.data.forEach(obj => {
-          if (obj.place_id) {
-            let request = {
-              placeId: obj.place_id,
-            };
-            let service = new window.google.maps.places.PlacesService(window.HomeMap);
-            service.getDetails(request, (place, status) => {
-              if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                 data.push(place);
-              }
-            })
-          }
-        });
+    
+    const getDetailsAsync = (id) => {
+      return new Promise(resolve => {
+        if (id) {
+          let request = {
+            placeId: id,
+          };
+          let service = new window.google.maps.places.PlacesService(window.HomeMap);
+          service.getDetails(request, (place, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                resolve(place);
+            }
+          })
+        } else {
+          resolve();
+        }
+      })
+    }
+
+    const requestAsync = () => {
+      return new Promise(resolve => {
+        axios.get('/api/places')
+          .then(results => {
+            resolve(results);
+          })
+      })
+    }
+
+    const asyncFetch = async () => {
+      let data = [];
+      let results = await requestAsync();
+      for (let obj of results.data) {
+        let placeDetail = await getDetailsAsync(obj.place_id);
+        if (placeDetail) {
+          data.push(placeDetail);
+        }
+      }
+      return data;
+    }
+
+    asyncFetch()
+      .then(data => {
         this.setState({
           savedData: data
         })
-        console.log(this.state.savedData)
       })
-      .catch(err => console.error(err));
-  }
 
-  // getDatafromID(id) {
-  //   let request = {
-  //     placeId: id,
-  //   };
-  //   let service = new window.google.maps.places.PlacesService(window.HomeMap);
-  //   service.getDetails(request, (place, status) => {
-  //     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-  //       return place;
-  //     }
-  //   })
-  // }
+  }
 
   render() {
     return (
