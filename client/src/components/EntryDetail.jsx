@@ -5,7 +5,7 @@ const EntryDetail = props => (
   <div style={{overflowY: 'scroll', maxHeight: '80vh'}} className="EntryDetail">
     <div className="d-flex justify-content-between">
       <h2>{props.currentPlace.name}</h2>
-      <button onClick={props.savePlace(props.currentPlace.place_id)}>{`${props.request}`}</button>
+      <button onClick={props.saveOrDelete(props.currentPlace.place_id)}>{`${props.request}`}</button>
     </div>
     <h3 onClick={() => {
       props.updateCurrentPlace({});

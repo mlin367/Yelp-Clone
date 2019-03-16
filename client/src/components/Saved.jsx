@@ -15,7 +15,18 @@ class Saved extends React.Component {
   }
 
   componentDidMount() {
-    this.fetch();
+    if (!window.google) {
+      const s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.src = `https://maps.googleapis.com/maps/api/js?key=${
+        process.env.API_KEY
+      }&libraries=places`;
+      const x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+      s.addEventListener('load', e => this.fetch());
+    } else {
+      this.fetch();
+    }
   }
 
   fetch() {
@@ -74,7 +85,6 @@ class Saved extends React.Component {
         <h1>Saved</h1>
         <div style={{minHeight: '80vh'}} className="row">
           <div className="savedWrapper1 col">
-            {/* <Redirect from='/saved' to='/saved/results' /> */}
             <Route path='/saved/results' render={() => <PlacesList request='Delete' path='/saved/result' data={this.state.savedData} />} />
             <Route path='/saved/result=:id' render={ () => <EntryDetailContainer request='Delete' path='/saved/results'/>} />
           </div>
