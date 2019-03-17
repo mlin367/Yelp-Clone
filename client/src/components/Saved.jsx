@@ -20,8 +20,9 @@ class Saved extends React.Component {
   }
 
   handleListEntryOnClick(props) {
-    props.updateCurrentPlace(props.obj.place);
-    window.HomeMap.setCenter(props.obj.place.geometry.location)
+    console.log(props)
+    props.updateCurrentPlace(props.obj);
+    window.HomeMap.setCenter(props.obj.geometry.location)
     window.HomeMap.setZoom(15);
   }
 

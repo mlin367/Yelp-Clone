@@ -39,7 +39,6 @@ class Home extends React.Component {
     service = new window.google.maps.places.PlacesService(window.HomeMap);
     service.textSearch(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results)
         this.props.updateResults(results);
         this.props.updateCurrentPlace({});
         window.HomeMap.setZoom(13);
