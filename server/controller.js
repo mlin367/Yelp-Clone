@@ -26,9 +26,10 @@ module.exports = {
   },
 
   delete: (req, res) => {
+    console.log(req.params)
     let { place_id } = req.params;
     Places.destroy({ where: { place_id } })
-      .then(response => res.status(203).send(response))
+      .then(response => res.status(203).send('place deleted'))
       .catch(err => console.error(err));
   }
 };

@@ -12,25 +12,20 @@ class Saved extends React.Component {
       savedData: []
     };
     this.fetch = this.fetch.bind(this);
+    this.deletePlace = this.deletePlace.bind(this);
   }
 
   componentDidMount() {
-    if (!window.google) {
-      const s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.src = `https://maps.googleapis.com/maps/api/js?key=${
-        process.env.API_KEY
-      }&libraries=places`;
-      const x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-      s.addEventListener('load', e => this.fetch());
-    } else {
-      this.fetch();
-    }
+    this.fetch();
+  }
+
+  handleListEntryOnClick(props) {
+    props.updateCurrentPlace(props.obj.place);
+    window.HomeMap.setCenter(props.obj.place.geometry.location)
+    window.HomeMap.setZoom(15);
   }
 
   fetch() {
-    
     const getDetailsAsync = (id) => {
       return new Promise(resolve => {
         if (id) {
@@ -49,18 +44,9 @@ class Saved extends React.Component {
       })
     }
 
-    const requestAsync = () => {
-      return new Promise(resolve => {
-        axios.get('/api/places')
-          .then(results => {
-            resolve(results);
-          })
-      })
-    }
-
     const asyncFetch = async () => {
       let data = [];
-      let results = await requestAsync();
+      let results = await axios.get('/api/places');
       for (let obj of results.data) {
         let placeDetail = await getDetailsAsync(obj.place_id);
         if (placeDetail) {
@@ -79,14 +65,22 @@ class Saved extends React.Component {
 
   }
 
+  deletePlace(id) {
+    axios.delete(`/api/places/${id}`)
+      .then(response => {
+        console.log('place deleted');
+        this.fetch();
+      })
+  }
+
   render() {
     return (
       <div className="Saved container">
         <h1>Saved</h1>
         <div style={{minHeight: '80vh'}} className="row">
           <div className="savedWrapper1 col">
-            <Route path='/saved/results' render={() => <PlacesList request='Delete' path='/saved/result' data={this.state.savedData} />} />
-            <Route path='/saved/result=:id' render={ () => <EntryDetailContainer request='Delete' path='/saved/results'/>} />
+            <Route path='/saved/results' render={() => <PlacesList request='Delete' path='/saved/result' saveOrDelete={this.deletePlace} handleOnClick={this.handleListEntryOnClick} data={this.state.savedData} />} />
+            <Route path='/saved/result=:id' render={ () => <EntryDetailContainer request='Delete' saveOrDelete={this.deletePlace} path='/saved/results'/>} />
           </div>
           <GoogleMapContainer markers={this.props.currentPlace.name ? [this.props.currentPlace] : this.state.savedData} id="savedMap"/>
         </div>
