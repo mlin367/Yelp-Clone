@@ -29,22 +29,37 @@ class Home extends React.Component {
     .catch(err => console.error(err));
   }
 
-  handeOnClick() {
-    let service;
-    let request = {
-      location: this.props.currentCoords,
-      radius: '500',
-      query: this.state.query
-    };
-    service = new window.google.maps.places.PlacesService(window.HomeMap);
-    service.textSearch(request, (results, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        this.props.updateResults(results);
-        this.props.updateCurrentPlace({});
-        window.HomeMap.setZoom(13);
-        window.HomeMap.setCenter(this.props.currentCoords);
+  async handeOnClick() {
+
+    const asyncTextSearch = () => {
+      return new Promise(resolve => {
+        let service;
+        let request = {
+          location: this.props.currentCoords,
+          radius: '500',
+          query: this.state.query
+        };
+        service = new window.google.maps.places.PlacesService(window.HomeMap);
+        service.textSearch(request, (results, status) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            resolve(results);
+          }
+        })
+      })
+    }
+
+    let results = await asyncTextSearch();
+    for (let obj of results) {
+      let isSaved = await axios.get(`/api/places/${obj.place_id}`);
+      if (isSaved.data !== '') {
+        obj.saved = true;
       }
-    })
+    }
+    this.props.updateResults(results);
+    this.props.updateCurrentPlace({});
+    window.HomeMap.setZoom(13);
+    window.HomeMap.setCenter(this.props.currentCoords);
+
   }
 
   handleListEntryClick(props) {
