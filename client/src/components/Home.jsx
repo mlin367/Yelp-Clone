@@ -21,9 +21,17 @@ class Home extends React.Component {
     })
   };
 
-  savePlace(place_id, props) {
+  savePlace(props) {
+    let id;
+    if (props.currentPlace) {
+      let newObj = {...props.currentPlace, saved: true};
+      props.updateCurrentPlace(newObj);
+      id = props.currentPlace.place_id;
+    } else {
+      id = props.obj.place_id;
+    }
     axios.post('/api/places', {
-      place_id
+      place_id: id
     })
     .then(response => console.log('place id saved'))
     .catch(err => console.error(err));
@@ -31,7 +39,7 @@ class Home extends React.Component {
     let newResults = [];
 
     props.data.forEach(obj => {
-      if (obj.place_id === place_id) {
+      if (obj.place_id === id) {
         newResults.push({...obj, saved: true});
       } else {
         newResults.push({...obj});
@@ -39,6 +47,17 @@ class Home extends React.Component {
     })
     props.updateResults(newResults);
   }
+
+  // savePlaceEntryDetail(props) {
+  //   axios.post('/api/places', {
+  //     place_id: props.currentPlace.place_id
+  //   })
+  //   .then(response => console.log('place id saved'))
+  //   .catch(err => console.error(err));
+
+  //   let newObj = {...props.currentPlace, saved: true};
+  //   props.updateCurrentPlace(newObj);
+  // }
 
   async handeOnClick() {
 

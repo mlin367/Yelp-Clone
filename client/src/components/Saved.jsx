@@ -66,7 +66,13 @@ class Saved extends React.Component {
 
   }
 
-  deletePlace(id) {
+  deletePlace(props) {
+    let id;
+    if (props.currentPlace) {
+      id = props.currentPlace.place_id;
+    } else {
+      id = props.obj.place_id;
+    }
     axios.delete(`/api/places/${id}`)
       .then(response => {
         console.log('place deleted');
