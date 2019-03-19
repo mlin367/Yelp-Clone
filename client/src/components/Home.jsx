@@ -48,16 +48,6 @@ class Home extends React.Component {
     props.updateResults(newResults);
   }
 
-  // savePlaceEntryDetail(props) {
-  //   axios.post('/api/places', {
-  //     place_id: props.currentPlace.place_id
-  //   })
-  //   .then(response => console.log('place id saved'))
-  //   .catch(err => console.error(err));
-
-  //   let newObj = {...props.currentPlace, saved: true};
-  //   props.updateCurrentPlace(newObj);
-  // }
 
   async handeOnClick() {
 

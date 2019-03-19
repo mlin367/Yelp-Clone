@@ -78,6 +78,16 @@ class Saved extends React.Component {
         console.log('place deleted');
         this.fetch();
       })
+    let newResults = [];
+
+    props.data.forEach(obj => {
+      if (obj.place_id === id) {
+        newResults.push({...obj, saved: false});
+      } else {
+        newResults.push({...obj});
+      }
+    })
+    props.updateResults(newResults);  
   }
 
   render() {
