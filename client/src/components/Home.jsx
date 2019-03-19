@@ -21,12 +21,23 @@ class Home extends React.Component {
     })
   };
 
-  savePlace(place_id) {
+  savePlace(place_id, props) {
     axios.post('/api/places', {
       place_id
     })
     .then(response => console.log('place id saved'))
     .catch(err => console.error(err));
+
+    let newResults = [];
+
+    props.data.forEach(obj => {
+      if (obj.place_id === place_id) {
+        newResults.push({...obj, saved: true});
+      } else {
+        newResults.push({...obj});
+      }
+    })
+    props.updateResults(newResults);
   }
 
   async handeOnClick() {
@@ -69,6 +80,9 @@ class Home extends React.Component {
     let service = new window.google.maps.places.PlacesService(window.HomeMap);
     service.getDetails(request, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        if (props.obj.saved) {
+          place.saved = true;
+        }
         console.log(place);
         props.updateCurrentPlace(place);
         window.HomeMap.setCenter(place.geometry.location)
