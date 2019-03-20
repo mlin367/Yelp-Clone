@@ -10,9 +10,6 @@ COPY . .
 
 EXPOSE 3000
 
-ARG PORT
-ENV PORT 3000
-
 RUN npm run build
 
 CMD [ "npm", "start"]
