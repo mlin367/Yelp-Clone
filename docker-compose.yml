@@ -3,7 +3,6 @@ services:
   db:
     restart: always
     image: postgres:11
-    command: "--innodb_use_native_aio=0"
     environment: 
       POSTGRES_PASSWORD: password
       POSTGRES_DB: yelp
