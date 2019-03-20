@@ -16,6 +16,9 @@ const About = props => (
       access them in the saved tab (data is persisted in a database). They can
       also delete saved places in the save tab as well.
     </p>
+    <p>
+      Note: requires geolocation-compatible browsers
+    </p>
     Tech Stacks:
     <ul>
       <li>React</li>
