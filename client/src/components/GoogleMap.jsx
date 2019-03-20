@@ -80,7 +80,7 @@ class GoogleMap extends React.Component {
 
   render() {
     return (
-    <div className="col-lg"> 
+    <div className="GoogleMap col-sm"> 
       <div style={{ width: '100%', height: '100%' }} id={this.props.id}>
 
       </div>

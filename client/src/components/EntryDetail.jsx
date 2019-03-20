@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const EntryDetail = props => (
-  <div style={{overflowY: 'scroll', maxHeight: '80vh'}} className="EntryDetail">
+  <div className="EntryDetail">
     <div className="d-flex justify-content-between">
       <h2>{props.currentPlace.name}</h2>
       {props.currentPlace.saved ? <span>Place Already Saved</span> : <button onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}

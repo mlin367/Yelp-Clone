@@ -1,1 +1,27 @@
 @import "node_modules/bootstrap/scss/bootstrap";
+
+.PlacesList {
+  overflow-y: scroll;
+  max-height: 75vh;
+}
+
+.GoogleMap {
+  height: 80vh;
+}
+
+.EntryDetail {
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .PlacesList {
+    max-height: 60vh;
+  }
+  .GoogleMap {
+    height: 40vh;
+  }
+  .EntryDetail {
+    max-height: 60vh;
+  }
+}
