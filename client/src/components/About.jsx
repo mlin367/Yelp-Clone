@@ -24,6 +24,7 @@ const About = props => (
       <li>Node.js -> Express</li>
       <li>PostgreSQL</li>
       <li>Google Maps API</li>
+      <li>Bootstrap</li>
     </ul>
 
     <span>Made by: Matthew Lin</span>
