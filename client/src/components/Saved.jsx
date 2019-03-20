@@ -13,6 +13,7 @@ class Saved extends React.Component {
     };
     this.fetch = this.fetch.bind(this);
     this.deletePlace = this.deletePlace.bind(this);
+    axios.defaults.baseURL = 'http://18.223.98.89:3000';
   }
 
   componentDidMount() {

@@ -14,6 +14,7 @@ class Home extends React.Component {
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleEnterPress = this.handleEnterPress.bind(this);
+    axios.defaults.baseURL = 'http://18.223.98.89:3000';
   }
 
   handleOnInputChange(e) {
