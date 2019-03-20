@@ -92,7 +92,7 @@ class Saved extends React.Component {
 
   render() {
     return (
-      <div className="Saved container">
+      <div className="Saved container mt-4">
         <h1>Saved</h1>
         <div style={{minHeight: '80vh'}} className="row">
           <div className="savedWrapper1 col">

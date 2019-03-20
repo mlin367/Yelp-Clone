@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBar = props => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div className="Yelp navbar-brand">Yelp-Clone!</div>
+  <nav className="navbar py-2 navbar-expand-lg navbar-light bg-light">
+    <h1 className="Yelp navbar-brand">Yelp-Clone!</h1>
     <div className="navBarWrapper">
 
-      <Link onClick={() => {
+      <Link className="nav-link" onClick={() => {
         props.updateCurrentPlace({});
         window.HomeMap.setZoom(13);
         window.HomeMap.setCenter(props.currentCoords);
@@ -14,7 +14,7 @@ const NavBar = props => (
         Home
       </Link>
 
-      <Link onClick={() => {
+      <Link className="nav-link" onClick={() => {
         props.updateCurrentPlace({});
         window.HomeMap.setZoom(13);
         window.HomeMap.setCenter(props.currentCoords);
@@ -22,7 +22,7 @@ const NavBar = props => (
         Saved
       </Link>
       
-      <Link to="/about" className="NavAbout mx-3 nav-item">
+      <Link className="nav-link" to="/about" className="NavAbout mx-3 nav-item">
         About
       </Link>
     </div>

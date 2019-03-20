@@ -10,10 +10,10 @@ const ListEntry = props => (
       {props.obj.saved ? <span>Place Already Saved</span> : <button onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}
       
     </div>
-    <img className="img-fluid mx-auto img-thumbnail" src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : null}></img>
-    <ul>
-      <li>Address: {props.obj.formatted_address}</li>
-      <li>Rating: {props.obj.rating}</li>
+    <img className="img-fluid mx-auto img-thumbnail" src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}) : null}></img>
+    <ul className="list-group">
+      <li><strong>Address: </strong>{props.obj.formatted_address}</li>
+      <li><strong>Rating:</strong> {props.obj.rating}</li>
     </ul>
   </div>
 );

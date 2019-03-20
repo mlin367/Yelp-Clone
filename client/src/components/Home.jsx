@@ -12,7 +12,8 @@ class Home extends React.Component {
       query: ''
     }
     this.handleOnInputChange = this.handleOnInputChange.bind(this);
-    this.handleOnClick = this.handeOnClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleEnterPress = this.handleEnterPress.bind(this);
   }
 
   handleOnInputChange(e) {
@@ -48,8 +49,13 @@ class Home extends React.Component {
     props.updateResults(newResults);
   }
 
+  handleEnterPress(e) {
+    if (e.key === 'Enter') {
+      this.handleOnClick();
+    }
+  }
 
-  async handeOnClick() {
+  async handleOnClick() {
 
     const asyncTextSearch = () => {
       return new Promise(resolve => {
@@ -102,16 +108,18 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="Home container">
+      <div className="Home container mt-4">
         <h1>Home</h1>
         <div style={{minHeight: '80vh'}} className="row">
           <div className="homeWrapper1 col">
-            <input onChange={this.handleOnInputChange}></input>
-            <button onClick={this.handleOnClick}>
-              <Link to='/home/results'>
-                Search
-              </Link>
-            </button>
+            <div className="input-group">
+              <input onKeyPress={this.handleEnterPress} onChange={this.handleOnInputChange}></input>
+              <button className="btn btn-primary input-group-append" onClick={this.handleOnClick}>
+                <Link style={{textDecoration: 'none', color: 'white'}} to='/home/results'>
+                  Search
+                </Link>
+              </button>
+            </div>
               <Route path='/home/results' render={() => <PlacesListContainer saveOrDelete={this.savePlace} path='/home/result' request='Save' handleOnClick={this.handleListEntryClick}/>} />
               <Route path='/home/result=:id' render={ () => <EntryDetailContainer saveOrDelete={this.savePlace} request='Save' path='/home/results' />} />
           </div>

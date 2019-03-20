@@ -16,28 +16,28 @@ const EntryDetail = props => (
     </h3>
     <div className="pictureContainer container-fluid">
       {props.currentPlace.photos ? props.currentPlace.photos.map((obj, i) => (
-        <img key={Math.random()*i} className="img-fluid mx-2 img-thumbnail" src={obj.getUrl({'maxWidth': 100, 'maxHeight': 100})}></img>
+        <img key={Math.random()*i} className="img-fluid mx-2 img-thumbnail" src={obj.getUrl({'maxWidth': 125, 'maxHeight': 125})}></img>
       )) : null}
     </div>
-    <ul>
-      <li>Address: {props.currentPlace.formatted_address}</li>
-      <li>Rating: {props.currentPlace.rating}</li>
-      <li>Phone Number: {props.currentPlace.formatted_phone_number}</li>
-      <li>Hours: <ol>
+    <ul className="list-group">
+      <li className="list-group-item"><strong>Address:</strong> {props.currentPlace.formatted_address}</li>
+      <li className="list-group-item"><strong>Rating:</strong> {props.currentPlace.rating}</li>
+      <li className="list-group-item"><strong>Phone Number:</strong> {props.currentPlace.formatted_phone_number}</li>
+      <li className="list-group-item"><strong>Hours:</strong> <ol>
                   {props.currentPlace.opening_hours ? props.currentPlace.opening_hours.weekday_text.map(string => (
                     <li>{string}</li>
                   )) : <span>Not available</span>}
                 </ol>
       </li>
-      <li>Reviews: <ul>
+      <li className="list-group-item"><strong>Reviews:</strong> <ul className="list-group list-group-flush">
                     {props.currentPlace.reviews ? props.currentPlace.reviews.map((obj, i) => (
-                      <li key={Math.random()*i}>
+                      <li className="list-group-item" key={Math.random()*i}>
                         Author: {obj.author_name}
                         <br />
                         Rating: {obj.rating}
                         <br />
                         Review: <p>{obj.text}</p>
-                        Submitted: {obj.relative_time_description}
+                        Submitted: <em>{obj.relative_time_description}</em>
                         <br /><br />
                       </li>
                     )) : null}
