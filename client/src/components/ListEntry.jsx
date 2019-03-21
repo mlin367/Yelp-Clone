@@ -7,7 +7,7 @@ const ListEntry = props => (
       <h2>
         <Link onClick={() => props.handleOnClick(props)} to={`${props.path}=${props.id}`}>{props.obj.name}</Link>
       </h2>
-      {props.obj.saved ? <span>Place Already Saved</span> : <button onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}
+      {props.obj.saved ? <span style={{color: 'red'}}>Place Already Saved</span> : <button className="btn btn-primary" onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}
       
     </div>
     <img className="img-fluid mx-auto img-thumbnail" src={props.obj.photos ? props.obj.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}) : null}></img>
