@@ -5,7 +5,7 @@ const EntryDetail = props => (
   <div className="EntryDetail">
     <div className="d-flex justify-content-between">
       <h2>{props.currentPlace.name}</h2>
-      {props.currentPlace.saved ? <span>Place Already Saved</span> : <button onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}
+      {props.currentPlace.saved ? <span style={{color: 'red'}}>Place Already Saved</span> : <button className="btn btn-primary" onClick={() => props.saveOrDelete(props)}>{`${props.request}`}</button>}
     </div>
     <h3 onClick={() => {
       props.updateCurrentPlace({});
