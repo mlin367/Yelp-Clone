@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const path = require('path');
 const router = require('./routes');
 const https = require('https');
-const http = require('http');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -31,13 +30,13 @@ const options = {
 };
 
 const server = https.createServer(options, app);
-const insecureServer = http.createServer();
+const http = express.createServer();
 
-insecureServer.get('*', (req, res) => {
+http.get('*', (req, res) => {
   res.redirect('https://' + req.headers.host + req.url);
 });
 
-insecureServer.listen(80);
+http.listen(80);
 
 server.listen(port, () => {
   console.log(`app is listening on port ${port}`);
