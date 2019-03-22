@@ -12,7 +12,7 @@ ARG PORT
 
 ENV PORT 443
 
-EXPOSE 443
+EXPOSE 443 80
 
 RUN npm run build
 
