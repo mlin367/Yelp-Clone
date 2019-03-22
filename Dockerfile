@@ -10,9 +10,9 @@ COPY . .
 
 ARG PORT
 
-ENV PORT 3000
+ENV PORT 443
 
-EXPOSE 3000
+EXPOSE 443
 
 RUN npm run build
 
