@@ -12,6 +12,18 @@ const port = process.env.PORT;
 
 const app = express();
 
+const ensureSecure = (req, res, next) => {
+  if(req.secure){
+    // OK, continue
+    return next();
+  };
+  // handle port numbers if you need non defaults
+  // res.redirect('https://' + req.host + req.url); // express 3.x
+  res.redirect('https://' + req.hostname + req.url); // express 4.x
+}
+
+app.all('*', ensureSecure);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -31,13 +43,7 @@ const options = {
 };
 
 const server = https.createServer(options, app);
-const insecureServer = http.createServer(app);
-
-insecureServer.get('*', (req, res) => {
-  res.redirect('https://' + req.headers.host + req.url);
-});
-
-insecureServer.listen(80);
+const insecureServer = http.createServer(app).listen(80);
 
 server.listen(port, () => {
   console.log(`app is listening on port ${port}`);
