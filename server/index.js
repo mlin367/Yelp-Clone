@@ -6,6 +6,7 @@ const router = require('./routes');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
+const cors = require('cors');
 require('dotenv').config();
 
 const port = process.env.PORT;
@@ -24,6 +25,7 @@ const ensureSecure = (req, res, next) => {
 
 app.all('*', ensureSecure);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
