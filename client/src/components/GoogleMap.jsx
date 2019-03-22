@@ -33,7 +33,7 @@ class GoogleMap extends React.Component {
           position: pos,
           map,
           title: 'Your current location',
-          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+          icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
         })
         this.props.updateCoords(position.coords.latitude, position.coords.longitude);
         window.HomeMap = map;
