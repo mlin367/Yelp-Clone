@@ -39,9 +39,9 @@ app.get('*', (req, res) => {
 })
 
 const options = {
-  key: fs.readFileSync(path.join(__dirname, './SSL/server.private.pem')),
-  cert: fs.readFileSync(path.join(__dirname, './SSL/server.public.pem')),
-  ca: fs.readFileSync(path.join(__dirname, './SSL/certificate-chain.pem'))
+  key: fs.readFileSync(path.join(__dirname, './SSL/server_private.key')),
+  cert: fs.readFileSync(path.join(__dirname, './SSL/server_public.csr')),
+  ca: fs.readFileSync(path.join(__dirname, './SSL/certificate_chain.crt'))
 };
 
 const server = https.createServer(options, app);
