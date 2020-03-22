@@ -14,14 +14,14 @@ const port = process.env.PORT;
 const app = express();
 
 const ensureSecure = (req, res, next) => {
-  if(req.secure){
+  if (req.secure) {
     // OK, continue
     return next();
-  };
+  }
   // handle port numbers if you need non defaults
   // res.redirect('https://' + req.host + req.url); // express 3.x
   res.redirect('https://' + req.hostname + req.url); // express 4.x
-}
+};
 
 app.all('*', ensureSecure);
 
@@ -35,13 +35,18 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use('/api', router);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../client/dist/index.html'))
-})
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
 
 const options = {
-  key: fs.readFileSync(path.join(__dirname, './SSL/server_private.pem')),
-  // cert: fs.readFileSync(path.join(__dirname, './SSL/server_public.pem')),
-  ca: fs.readFileSync(path.join(__dirname, './SSL/certificate_chain.pem'))
+  key: fs.readFileSync(path.join(__dirname, './SSL/myserver.key')),
+  cert: fs.readFileSync(path.join(__dirname, './SSL/www_mlinprojects_com.crt')),
+  ca: [
+    fs.readFileSync(path.join(__dirname, './SSL/AddTrustExternalCARoot.crt')),
+    fs.readFileSync(
+      path.join(__dirname, './SSL/www_mlinprojects_com.ca-bundle')
+    )
+  ]
 };
 
 const server = https.createServer(options, app);
