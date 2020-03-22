@@ -39,10 +39,14 @@ app.get('*', (req, res) => {
 });
 
 const options = {
+  // Private Key
   key: fs.readFileSync(path.join(__dirname, './SSL/myserver.key')),
+  // SSL Certificate
   cert: fs.readFileSync(path.join(__dirname, './SSL/www_mlinprojects_com.crt')),
   ca: [
+    // Root Certificate
     fs.readFileSync(path.join(__dirname, './SSL/AddTrustExternalCARoot.crt')),
+    // Bundle which includes intermediate certificates (sometimes bundle includes root)
     fs.readFileSync(
       path.join(__dirname, './SSL/www_mlinprojects_com.ca-bundle')
     )
