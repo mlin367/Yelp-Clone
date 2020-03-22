@@ -40,7 +40,7 @@ app.get('*', (req, res) => {
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, './SSL/server_private.pem')),
-  cert: fs.readFileSync(path.join(__dirname, './SSL/server_public.pem')),
+  // cert: fs.readFileSync(path.join(__dirname, './SSL/server_public.pem')),
   ca: fs.readFileSync(path.join(__dirname, './SSL/certificate_chain.pem'))
 };
 
